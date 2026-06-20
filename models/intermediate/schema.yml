@@ -1,0 +1,6 @@
+models:
+  - name: int_booking_details
+    description: table for booking details.
+
+  - name: int_list_host
+    description: table to store listing details

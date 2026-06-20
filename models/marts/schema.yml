@@ -1,0 +1,66 @@
+version: 2
+
+models:
+  - name: fct_bookings
+
+    config:
+      contract:
+        enforced: true
+
+    columns:
+      - name: booking_id
+        data_type: string
+
+      - name: listing_id
+        data_type: int64
+
+      - name: booking_date
+        data_type: date
+
+      - name: booking_amount
+        data_type: int64
+
+      - name: nights_booked
+        data_type: int64
+
+      - name: cleaning_fee
+        data_type: int64
+
+      - name: service_fee
+        data_type: int64
+
+      - name: booking_status
+        data_type: string
+
+      - name: created_at
+        data_type: timestamp
+
+      - name: host_id
+        data_type: int64
+
+      - name: property_type
+        data_type: string
+
+      - name: room_type
+        data_type: string
+
+      - name: city
+        data_type: string
+
+      - name: country
+        data_type: string
+
+      - name: accommodates
+        data_type: int64
+
+      - name: bedrooms
+        data_type: int64
+
+      - name: bathrooms
+        data_type: int64
+
+      - name: price_per_night
+        data_type: int64
+
+      - name: total_amount
+        data_type: int64
