@@ -1,0 +1,52 @@
+name: dbtCI
+
+on:
+  pull_request:
+
+jobs:
+  dbt_build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3:11"
+
+      - name: set up dbt
+        run: pip install dbt-bigquery
+
+      - name: create service account key files
+        run: echo '${{ secrets.GCP_SERVICE_ACCOUNT }}' > key.json
+
+      - name: Create profiles.yml
+        run: |
+          mkdir -p ~/.dbt
+
+          cat > ~/.dbt/profiles.yml <<EOF
+          airbnb_dbt_project:
+            target: ci
+            outputs:
+              ci:
+                type: bigquery
+                method: service-account
+                project: airbnb-project-499912
+                dataset: ci_analytics
+                threads: 4
+                keyfile: $(pwd)/key.json
+                location: US
+                priority: interactive
+          EOF
+
+      - name: dbt deps
+        run: dbt deps
+
+      - name: dbt debug
+        run: dbt debug
+
+      - name: dbt build
+        run: dbt build
+
