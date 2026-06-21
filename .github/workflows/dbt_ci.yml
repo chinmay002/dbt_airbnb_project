@@ -50,4 +50,3 @@ jobs:
       - name: dbt build
         run: dbt build
 
-#
